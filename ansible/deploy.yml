@@ -1,0 +1,13 @@
+- hosts: app
+  become: yes
+
+  tasks:
+
+  - name: Run container
+    docker_container:
+      name: devops-app
+      image: abhishek7380/devops-app:latest
+      state: started
+      ports:
+        - "3000:3000"
+
