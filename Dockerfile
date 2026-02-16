@@ -1,10 +1,12 @@
-FROM node:18
+FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /usr/src/app
+
+COPY app/package*.json ./
+
+RUN npm install --production
 
 COPY app/ .
-
-RUN npm install
 
 EXPOSE 3000
 
