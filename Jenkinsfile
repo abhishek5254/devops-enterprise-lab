@@ -33,6 +33,15 @@ pipeline {
                 }
             }
         }
+	stage('Build Docker Image') {
+    	    steps {
+        	sh '''
+        		docker build -t devops-app:${BUILD_NUMBER} .
+        		docker images | grep devops-app
+        	   '''
+    }
+}
+
 
     }
 }
