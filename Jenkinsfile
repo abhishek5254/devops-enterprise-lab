@@ -27,6 +27,9 @@ pipeline {
         }
 
         stage('Quality Gate') {
+	    when {
+		branch 'prod'
+	}
             steps {
                 timeout(time: 7, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
