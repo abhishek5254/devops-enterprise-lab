@@ -44,6 +44,23 @@ pipeline {
         	   '''
     }
 }
+	stage('Tag Image') {
+    	steps {
+        	sh '''
+        	docker tag devops-app:${BUILD_NUMBER} abhishek7380/devops-app:${BUILD_NUMBER}
+        	docker tag devops-app:${BUILD_NUMBER} abhishek7380/devops-app:latest
+        	'''
+    		}
+	}
+
+	stage('Push Image') {
+    		steps {
+        	sh '''
+        	docker push abhishek7380/devops-app:${BUILD_NUMBER}
+        	docker push abhishek7380/devops-app:latest
+        	'''
+    	      }
+	}
 
 
     }
