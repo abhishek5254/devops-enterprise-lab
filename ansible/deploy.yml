@@ -1,13 +1,19 @@
-- hosts: app
-  become: yes
+- name: Deploy DevOps App Container
+  hosts: appserver
+  become: true
 
   tasks:
 
-  - name: Run container
-    docker_container:
-      name: devops-app
-      image: abhishek7380/devops-app:latest
-      state: started
-      ports:
-        - "3000:3000"
+    - name: Pull latest Docker image
+      command: docker pull abhishek7380/devops-app:latest
 
+    - name: Stop existing container
+      ignore_errors: yes
+      command: docker stop devops-container
+
+    - name: Remove existing container
+      ignore_errors: yes
+      command: docker rm devops-container
+
+    - name: Run new container
+      command: docker run -d -p 3000:3000 --name devops-container abhishek7380/devops-app:latest
