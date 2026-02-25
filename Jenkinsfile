@@ -61,6 +61,13 @@ pipeline {
         	'''
     	      }
 	}
+	stage('Deploy to App Server') {
+	    	steps {
+	        sh '''
+	        ansible-playbook -i ansible/hosts.ini ansible/deploy.yml
+	        '''
+    	}
+}	
 
 
     }
